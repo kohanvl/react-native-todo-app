@@ -1,3 +1,3 @@
-export interface NavbarProps {
-  title: string;
+export interface AddTodoProps {
+  onAddTodo: (title: string) => void;
 }
