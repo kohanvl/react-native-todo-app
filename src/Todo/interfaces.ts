@@ -4,4 +4,5 @@ export interface TodoItemProps {
 }
 export interface TodoProps {
   todo: TodoItemProps;
+  onRemove: (id: string) => void;
 }

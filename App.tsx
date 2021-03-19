@@ -17,6 +17,9 @@ export default function App() {
       },
     ]);
   };
+  const handlerRemoveTodo = (id: string) => {
+    setTodos(todos.filter((todo: TodoItemProps) => todo.id !== id));
+  };
   return (
     <View>
       <Navbar title="Todo App" />
@@ -25,7 +28,9 @@ export default function App() {
         <FlatList
           data={todos}
           keyExtractor={(item: TodoItemProps) => item.id}
-          renderItem={({item}) => <Todo todo={item} />}
+          renderItem={({item}) => (
+            <Todo todo={item} onRemove={handlerRemoveTodo} />
+          )}
         />
       </View>
     </View>
