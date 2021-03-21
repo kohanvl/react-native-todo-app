@@ -7,10 +7,9 @@ import {TodoScreen} from './src/screens/TodoScreen';
 import {getTodoById} from './src/utils';
 
 export default function App() {
-  const [todoId, setTodoId] = useState<string | null>('1');
+  const [todoId, setTodoId] = useState<string | null>(null);
   const [todos, setTodos] = useState<TodoItemProps[] | []>([
     {id: '1', title: 'Написать прогу'},
-    {id: '2', title: 'Выложить на гит'},
   ]);
   const handlerAddTodo = (title: string) => {
     // TO DO: interface any
@@ -54,6 +53,17 @@ export default function App() {
     />
   );
 
+  const handlerUpdateTodo = (id: string, title: string) => {
+    setTodos((prev) =>
+      prev.map((todo: TodoItemProps) => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+        return todo;
+      }),
+    );
+  };
+
   if (todoId) {
     const currentTodo: TodoItemProps = getTodoById(todos, todoId);
     content = (
@@ -61,6 +71,7 @@ export default function App() {
         onGoBack={handlerGoBack}
         todo={currentTodo}
         onRemove={handlerRemoveTodo}
+        onSave={handlerUpdateTodo}
       />
     );
   }
