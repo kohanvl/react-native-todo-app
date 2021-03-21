@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   todo: {
@@ -6,7 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
     borderWidth: 1,
-    borderColor: '#eee',
+    borderColor: THEME.LIGHTGREY_COLOR,
     borderRadius: 5,
     marginBottom: 10,
   },

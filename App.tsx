@@ -6,7 +6,7 @@ import {MainScreen} from './src/screens/MainScreen';
 import {TodoScreen} from './src/screens/TodoScreen';
 
 export default function App() {
-  const [todoId, setTodoId] = useState<string | null>(null);
+  const [todoId, setTodoId] = useState<string | null>('1');
   const [todos, setTodos] = useState<TodoItemProps[] | []>([
     {id: '1', title: 'Написать прогу'},
     {id: '2', title: 'Выложить на гит'},
