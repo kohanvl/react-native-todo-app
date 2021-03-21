@@ -1,6 +1,7 @@
 import {TodoItemProps} from '../../components/Todo/interfaces';
 
 export interface TodoScreenProps {
-  onGoBack: () => void;
   todo: TodoItemProps;
+  onGoBack: () => void;
+  onRemove: (id: string) => void;
 }

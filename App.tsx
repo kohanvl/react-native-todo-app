@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {Navbar} from './src/components/Navbar';
 import {TodoItemProps} from './src/components/Todo/interfaces';
 import {MainScreen} from './src/screens/MainScreen';
 import {TodoScreen} from './src/screens/TodoScreen';
+import {getTodoById} from './src/utils';
 
 export default function App() {
   const [todoId, setTodoId] = useState<string | null>('1');
@@ -22,7 +23,24 @@ export default function App() {
     ]);
   };
   const handlerRemoveTodo = (id: string) => {
-    setTodos(todos.filter((todo: TodoItemProps) => todo.id !== id));
+    const currentTodo: TodoItemProps = getTodoById(todos, id);
+    Alert.alert(
+      'Удаление элемента',
+      `Вы уверены, что хотите удалить "${currentTodo.title}"?`,
+      [
+        {
+          text: 'Отмена',
+          style: 'cancel',
+        },
+        {
+          text: 'Удалить',
+          onPress: () => {
+            setTodoId(null);
+            setTodos(todos.filter((todo: TodoItemProps) => todo.id !== id));
+          },
+        },
+      ],
+    );
   };
   const handlerGoBack = () => {
     setTodoId(null);
@@ -37,10 +55,14 @@ export default function App() {
   );
 
   if (todoId) {
-    const currentTodo: TodoItemProps = todos.find(
-      (todo: TodoItemProps) => todo.id === todoId,
-    )!;
-    content = <TodoScreen onGoBack={handlerGoBack} todo={currentTodo} />;
+    const currentTodo: TodoItemProps = getTodoById(todos, todoId);
+    content = (
+      <TodoScreen
+        onGoBack={handlerGoBack}
+        todo={currentTodo}
+        onRemove={handlerRemoveTodo}
+      />
+    );
   }
 
   return (
