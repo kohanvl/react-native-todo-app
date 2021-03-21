@@ -4,4 +4,5 @@ export interface MainScreenProps {
   todos: TodoItemProps[];
   onAddTodo: (title: string) => void;
   onRemoveTodo: (id: string) => void;
+  onOpenTodo: (id: string) => void;
 }

@@ -6,8 +6,11 @@ import {MainScreen} from './src/screens/MainScreen';
 import {TodoScreen} from './src/screens/TodoScreen';
 
 export default function App() {
-  const [todoId, setTodoId] = useState(null);
-  const [todos, setTodos] = useState([]);
+  const [todoId, setTodoId] = useState<string | null>(null);
+  const [todos, setTodos] = useState<TodoItemProps[] | []>([
+    {id: '1', title: 'Написать прогу'},
+    {id: '2', title: 'Выложить на гит'},
+  ]);
   const handlerAddTodo = (title: string) => {
     // TO DO: interface any
     setTodos((prev: TodoItemProps[] | []): any => [
@@ -21,16 +24,23 @@ export default function App() {
   const handlerRemoveTodo = (id: string) => {
     setTodos(todos.filter((todo: TodoItemProps) => todo.id !== id));
   };
+  const handlerGoBack = () => {
+    setTodoId(null);
+  };
   let content = (
     <MainScreen
       todos={todos}
       onAddTodo={handlerAddTodo}
       onRemoveTodo={handlerRemoveTodo}
+      onOpenTodo={setTodoId}
     />
   );
 
   if (todoId) {
-    content = <TodoScreen />;
+    const currentTodo: TodoItemProps = todos.find(
+      (todo: TodoItemProps) => todo.id === todoId,
+    )!;
+    content = <TodoScreen onGoBack={handlerGoBack} todo={currentTodo} />;
   }
 
   return (
