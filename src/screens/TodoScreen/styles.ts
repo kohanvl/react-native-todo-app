@@ -8,4 +8,7 @@ export const styles = StyleSheet.create({
   button: {
     width: '40%',
   },
+  title: {
+    fontSize: 20,
+  },
 });
