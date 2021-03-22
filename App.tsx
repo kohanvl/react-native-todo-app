@@ -8,9 +8,7 @@ import {getTodoById} from './src/utils';
 
 export default function App() {
   const [todoId, setTodoId] = useState<string | null>(null);
-  const [todos, setTodos] = useState<TodoItemProps[] | []>([
-    {id: '1', title: 'Написать прогу'},
-  ]);
+  const [todos, setTodos] = useState<TodoItemProps[] | []>([]);
   const handlerAddTodo = (title: string) => {
     // TO DO: interface any
     setTodos((prev: TodoItemProps[] | []): any => [
@@ -33,6 +31,7 @@ export default function App() {
         },
         {
           text: 'Удалить',
+          style: 'destructive',
           onPress: () => {
             setTodoId(null);
             setTodos(todos.filter((todo: TodoItemProps) => todo.id !== id));
@@ -44,14 +43,6 @@ export default function App() {
   const handlerGoBack = () => {
     setTodoId(null);
   };
-  let content = (
-    <MainScreen
-      todos={todos}
-      onAddTodo={handlerAddTodo}
-      onRemoveTodo={handlerRemoveTodo}
-      onOpenTodo={setTodoId}
-    />
-  );
 
   const handlerUpdateTodo = (id: string, title: string) => {
     setTodos((prev) =>
@@ -64,22 +55,26 @@ export default function App() {
     );
   };
 
-  if (todoId) {
-    const currentTodo: TodoItemProps = getTodoById(todos, todoId);
-    content = (
-      <TodoScreen
-        onGoBack={handlerGoBack}
-        todo={currentTodo}
-        onRemove={handlerRemoveTodo}
-        onSave={handlerUpdateTodo}
-      />
-    );
-  }
-
   return (
     <View>
       <Navbar title="Todo App" />
-      <View style={styles.container}>{content}</View>
+      <View style={styles.container}>
+        {todoId ? (
+          <TodoScreen
+            onGoBack={handlerGoBack}
+            todo={getTodoById(todos, todoId)}
+            onRemove={handlerRemoveTodo}
+            onSave={handlerUpdateTodo}
+          />
+        ) : (
+          <MainScreen
+            todos={todos}
+            onAddTodo={handlerAddTodo}
+            onRemoveTodo={handlerRemoveTodo}
+            onOpenTodo={setTodoId}
+          />
+        )}
+      </View>
     </View>
   );
 }
