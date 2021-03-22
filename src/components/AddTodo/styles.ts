@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    width: '70%',
+    width: '60%',
     borderStyle: 'solid',
     borderBottomWidth: 2,
     borderBottomColor: THEME.MAIN_COLOR,

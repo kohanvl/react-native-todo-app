@@ -1,5 +1,7 @@
+import {AntDesign, FontAwesome} from '@expo/vector-icons';
 import React, {FC, useState} from 'react';
-import {Button, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import {AppButton} from '../../components/AppButton';
 import {AppCard} from '../../components/AppCard';
 import {ModalEdit} from '../../components/ModalEdit';
 import {THEME} from '../../theme';
@@ -33,18 +35,20 @@ export const TodoScreen: FC<TodoScreenProps> = ({
       />
       <AppCard>
         <Text style={styles.title}>{todo.title}</Text>
-        <Button title="Изменить" onPress={handlerToggleModal} />
+        <AppButton onPress={handlerToggleModal}>
+          <FontAwesome name="edit" size={20} />
+        </AppButton>
       </AppCard>
       <View style={styles.buttons}>
         <View style={styles.button}>
-          <Button title="Назад" onPress={onGoBack} color={THEME.GREY_COLOR} />
+          <AppButton onPress={onGoBack} color={THEME.GREY_COLOR}>
+            <AntDesign name="back" size={20} color="#fff" />
+          </AppButton>
         </View>
         <View style={styles.button}>
-          <Button
-            title="Удалить"
-            onPress={handlerRemoveTodo}
-            color={THEME.DANGER_COLOR}
-          />
+          <AppButton onPress={handlerRemoveTodo} color={THEME.DANGER_COLOR}>
+            <FontAwesome name="remove" size={20} color="#fff" />
+          </AppButton>
         </View>
       </View>
     </View>

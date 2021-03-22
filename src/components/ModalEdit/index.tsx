@@ -1,6 +1,7 @@
 import React, {FC, useState} from 'react';
-import {Alert, Button, Modal, TextInput, View} from 'react-native';
+import {Alert, Modal, TextInput, View} from 'react-native';
 import {THEME} from '../../theme';
+import {AppButton} from '../AppButton';
 import {ModalEditProps} from './interfaces';
 import {styles} from './styles';
 
@@ -32,8 +33,10 @@ export const ModalEdit: FC<ModalEditProps> = ({
           onChangeText={setTitle}
         />
         <View style={styles.buttons}>
-          <Button title="Отменить" onPress={onClose} color={THEME.GREY_COLOR} />
-          <Button title="Сохранить" onPress={handlerSaveTodo} />
+          <AppButton onPress={onClose} color={THEME.GREY_COLOR}>
+            Отменить
+          </AppButton>
+          <AppButton onPress={handlerSaveTodo}>Сохранить</AppButton>
         </View>
       </View>
     </Modal>

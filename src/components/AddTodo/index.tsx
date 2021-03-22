@@ -1,5 +1,6 @@
+import {AntDesign} from '@expo/vector-icons';
 import React, {FC, useState} from 'react';
-import {View, Button, TextInput, Alert} from 'react-native';
+import {Alert, TextInput, View} from 'react-native';
 import {AddTodoProps} from './interfaces';
 import {styles} from './styles';
 
@@ -23,7 +24,9 @@ export const AddTodo: FC<AddTodoProps> = ({onAddTodo}) => {
         autoCorrect={false}
         autoCapitalize="none"
       />
-      <Button title="Добавить" onPress={handlerPress} />
+      <AntDesign.Button name="pluscircleo" onPress={handlerPress}>
+        Добавить
+      </AntDesign.Button>
     </View>
   );
 };
